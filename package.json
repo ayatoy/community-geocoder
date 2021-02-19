@@ -5,13 +5,16 @@
   "main": "./bin/build.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --config ./docs/webpack.config.js",
+    "start:server": "node ./bin/server.js",
     "build": "webpack -p --config ./webpack.config.js",
     "build:api": "npm run build:clean && node ./bin/build.js",
     "build:clean": "rm -fr ./data && mkdir ./data && rm -fr ./docs/api && mkdir ./docs/api",
+    "build:server": "webpack -p --config ./webpack.server.config.js",
     "test": "npm run test:lint && npm run test:mocha ./test/**/*.spec.js",
     "test:lint": "eslint \"src/**/*.js\" --fix",
     "test:mocha": "mocha --require @babel/register",
     "test:addresses": "npm run test:mocha ./test/addresses.js",
+    "test:server": "npm run test:mocha ./test/server.js",
     "download": "bash bin/download.sh",
     "tree": "gzcat cache/isj.txt.gz  | node bin/tree.js cache/sac_label.json cache/sac_parent.json cache/sac_change.json > src/imi-enrichment-address/lib/tree.json"
   },
@@ -38,15 +41,18 @@
     "prettier-eslint-cli": "^5.0.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^0.23.1",
+    "supertest": "^6.1.3",
     "svg-inline-loader": "^0.8.2",
     "unzipper": "^0.10.11",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
     "@mapbox/geojson-extent": "^0.3.2",
     "babel-polyfill": "^6.26.0",
+    "express": "^4.17.1",
     "viewport-units-buggyfill": "^0.6.2"
   }
 }
