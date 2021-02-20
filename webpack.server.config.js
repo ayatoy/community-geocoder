@@ -24,6 +24,22 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            plugins: ['@babel/plugin-transform-classes'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  modules: 'commonjs',
+                  targets: {
+                    node: 'current',
+                  },
+                  useBuiltIns: 'usage',
+                  corejs: 3,
+                },
+              ],
+            ],
+          },
         },
       },
     ],
